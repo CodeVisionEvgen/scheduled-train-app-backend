@@ -114,10 +114,7 @@ export class AuthController {
   ) {
     res.cookie('RefreshToken', RefreshToken, {
       httpOnly: true,
-      secure: true,
     });
-    res.cookie('AccessToken', AccessToken, {
-      secure: true,
-    });
+    res.cookie('AccessToken', AccessToken);
   }
 }
