@@ -1,0 +1,19 @@
+import { ConfigService } from '@nestjs/config';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { User } from '../src/user/entities/user.entity';
+import { ScheduledTrain } from 'src/scheduled-train/entities/scheduled-train.entity';
+
+export const PostgreSQLConfig = (
+  configService: ConfigService,
+): TypeOrmModuleOptions => {
+  return {
+    type: 'postgres',
+    host: configService.get('POSTGRESQL_HOST') || 'localhost',
+    port: +configService.get('POSTGRESQL_PORT') || 5432,
+    username: configService.get('POSTGRESQL_USERNAME'),
+    password: configService.get('POSTGRESQL_PASSWORD'),
+    database: configService.get('POSTGRESQL_DATABASE'),
+    entities: [User, ScheduledTrain],
+    synchronize: true,
+  };
+};
